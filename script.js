@@ -28,7 +28,7 @@ operators.forEach(operator => {
 });
 
 document.addEventListener("keydown", (e) => {
-    if (e.key === "+" || e.key === "-" || e.key === "*" || e.key === "/" || e.key === "=") {
+    if (e.key === "+" || e.key === "-" || e.key === "*" || e.key === "/" || e.key === "=" || e.key === "Enter") {
         handleOperator(e.key);
     }
 });
@@ -100,14 +100,14 @@ function handleOperator(digit) {
         num1 = Number(pressedDigit);
         pressedDigit = "";
         op = digit;
-        if (op !== "=") {
+        if (op !== "=" && op !== "Enter") {
             totalDisplay += " " + op + " ";
         }
     }
     else {
         if (pressedDigit === "") {
             let tempOp = digit;
-            if (tempOp !== "=") {
+            if (tempOp !== "=" && tempOp !== "Enter") {
                 op = digit;
                 totalDisplay = num1 + " " + op + " ";
             }
@@ -123,7 +123,7 @@ function handleOperator(digit) {
             });
         }
         op = digit;
-        if (op !== "=") {
+        if (op !== "=" && op !== "Enter") {
             totalDisplay = num1 + " " + op + " ";
         }
     }
