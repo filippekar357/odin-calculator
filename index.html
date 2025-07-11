@@ -10,12 +10,13 @@
     <body>
         <div id="calc-body">
             <div id="display-cont">
-                <output></output>
+                <div id="total-disp" class="display"></div>
+                <div id="current" class="display">0</div>
             </div>
             <div id="button-cont">
                 <div class="button-row">
-                    <button>AC</button>
-                    <button>C</button>
+                    <button id="del-btn">DEL</button>
+                    <button id="clear-btn">AC</button>
                     <button class="operators">%</button>
                     <button class="operators">/</button>
                 </div>
@@ -39,7 +40,7 @@
                 </div>
                 <div class="button-row">
                     <button class="digits">0</button>
-                    <button>.</button>
+                    <button id="dot">.</button>
                     <button id="equals-btn" class="operators">=</button>
                 </div>
             </div>
