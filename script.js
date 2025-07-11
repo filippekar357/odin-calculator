@@ -2,12 +2,8 @@ const digits = document.querySelectorAll(".digits");
 const out = document.querySelector("output");
 const operators = document.querySelectorAll(".operators");
 let pressedDigit = "";
-let dgt1, dgt2, op, isOp;
+let num1, num2, op, isOp;
 let startCalc = 0;
-
-function checkOperator(op) {
-    
-}
 
 digits.forEach(digit => {
     digit.addEventListener("click", (e) => {
@@ -17,7 +13,6 @@ digits.forEach(digit => {
         }
         out.value += e.target.textContent;
         pressedDigit += e.target.textContent;
-        console.log(op);
     });
 });
 
@@ -28,7 +23,7 @@ operators.forEach(operator => {
             if (pressedDigit === "") {
                 return;
             }
-            dgt1 = Number(pressedDigit);
+            num1 = Number(pressedDigit);
             pressedDigit = "";
             op = e.target.textContent;
         }
@@ -37,11 +32,54 @@ operators.forEach(operator => {
                 op = e.target.textContent;
                 return;
             }
-            dgt2 = Number(pressedDigit);
+            num2 = Number(pressedDigit);
             pressedDigit = "";
-            checkOperator(op);
+            num1 = checkOperator(num1, num2, op);
             op = e.target.textContent;
         }
         startCalc++;
     });
 });
+
+function checkOperator(num1, num2, op) {
+    switch (op) {
+        case "+":
+            out.value = addNumbers(num1, num2);
+            break;
+        case "-":
+            out.value = subNumbers(num1, num2);
+            break;
+        case "x":
+            out.value = mulNumbers(num1, num2);
+            break;
+        case "/":
+            out.value = divNumbers(num1, num2);
+            break;
+        case "%":
+            out.value = remNumbers(num1, num2);
+            break;
+    }
+    return Number(out.value);
+}
+
+function addNumbers(num1, num2) {
+    console.log(num1, num2);
+    return num1 + num2;
+}
+
+function subNumbers(num1, num2) {
+    console.log(num1, num2);
+    return num1 - num2;
+}
+
+function mulNumbers(num1, num2) {
+    return num1 * num2;
+}
+
+function divNumbers(num1, num2) {
+    return num1 / num2;
+}
+
+function remNumbers(num1, num2) {
+    return num1 % num2;
+}
