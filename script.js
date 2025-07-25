@@ -11,7 +11,8 @@ let num1, num2, isOp;
 let op = "";
 let startCalc = 0;
 let currentDisplay = "";
-let totalDisplay = ""; 
+let totalDisplay = "";
+let numLength = 3;
 
 digits.forEach(digit => {
     digit.addEventListener("click", (e) => handleDigits(e.target.textContent));
@@ -52,6 +53,9 @@ document.addEventListener("keydown", (e) => {
 });
 
 function handleDigits(digit) {
+    if (stopOverflow() === -1) {
+        return;
+    }
     if (isOp) {
         currentDisplay = "";
         if (op === "=") {
@@ -92,6 +96,7 @@ function handleDigits(digit) {
 }
 
 function handleOperator(digit) {
+    numLength = 3;
     isOp = true;
     if (startCalc === 0) {
         if (pressedDigit === "") {
@@ -219,12 +224,34 @@ function resetCalc() {
     all.forEach(btn => {
         switchButtons(false, btn);
     });
+    out.style.fontSize = `30px`;
+    numLength = 3;
     render();
 }
 
+function stopOverflow() {
+    if (currentDisplay.length < 15) {
+        out.style.fontSize = `30px`;
+    }
+    if (currentDisplay.length >= 15 + numLength) {
+        if (numLength <= 9 && !isOp) {
+            out.style.fontSize = `${30 - numLength}px`;
+            numLength += 3;          
+        }
+        else if (isOp) {
+            return 0;
+        }
+        else {
+            return -1;
+        }
+    }
+}
+
 function render() {
-    out.textContent = currentDisplay;
-    outTotal.textContent = totalDisplay;
+    if (stopOverflow() !== -1) {
+        out.textContent = currentDisplay;
+        outTotal.textContent = totalDisplay;
+    }
 }
 
 
